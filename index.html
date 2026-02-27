@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loading — ProGrid</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <div class="grid-vignette"></div>
+  <div class="noise"></div>
+
+  <main class="wrap" style="min-height:100vh;display:grid;place-items:center;padding:70px 18px">
+    <div style="text-align:center;max-width:720px">
+      <img src="assets/brand/progrid_logo.png" alt="ProGrid" style="width:180px;height:auto;filter:invert(1);margin-bottom:18px"/>
+      <div class="kicker reveal">Loading</div>
+      <div class="h1 reveal" style="font-size:clamp(44px,7vw,84px)">Private access.</div>
+      <p class="sub reveal" style="margin-top:10px">This site is currently locked. Enter the password to continue.</p>
+
+      <div class="hero card reveal" style="margin:22px auto 0;max-width:520px">
+        <label class="kicker" style="display:block;text-align:left">Password</label>
+        <input id="pw" class="input" type="password" placeholder="Enter password" style="margin-top:10px"/>
+        <div class="btnrow" style="justify-content:center">
+          <a id="enter" class="btn primary" href="#">Enter</a>
+          <a class="btn ghost" href="https://x.com/" target="_blank" rel="noopener">X</a>
+        </div>
+        <p id="err" class="p" style="font-size:13px;margin-top:10px;opacity:.9"></p>
+      </div>
+
+      <div class="pills reveal" style="justify-content:center">
+        <span class="pill">ProGrid Agency</span>
+        <span class="pill">Elite Player Management</span>
+        <span class="pill">Selective Representation</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/gate.js"></script>
+  <script>
+    // no memory: require password every refresh/reopen
+    document.addEventListener("DOMContentLoaded", ()=>document.body.classList.add("loaded"));
+    const btn=document.getElementById("enter");
+    const pw=document.getElementById("pw");
+    const err=document.getElementById("err");
+    const PASS=(window.ProGridGate?window.ProGridGate.pass:"lockedin");
+
+    function go(){
+      const v=(pw.value||"").trim().toLowerCase();
+      if(v===PASS){
+        if(window.ProGridGate) window.ProGridGate.set();
+        // clean enter animation
+        document.body.style.transition="opacity .22s ease, transform .22s ease";
+        document.body.style.opacity="0";
+        document.body.style.transform="translateY(6px)";
+        setTimeout(()=>location.href="home.html", 160);
+      }else{
+        err.textContent="Incorrect password.";
+        pw.animate([{transform:"translateX(0)"},{transform:"translateX(-8px)"},{transform:"translateX(8px)"},{transform:"translateX(0)"}],
+          {duration:260, easing:"cubic-bezier(.2,.8,.2,1)"});
+      }
+    }
+    btn.addEventListener("click",(e)=>{e.preventDefault();go();});
+    pw.addEventListener("keydown",(e)=>{ if(e.key==="Enter") go(); });
+  </script>
+  <script src="js/common.js"></script>
+</body>
+</html>
