@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProGrid — Team</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* ── Team page: all 5 members in ONE unified 5-col grid ── */
+.team-all-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.team-card {
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+.team-card img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.72);
+  transition: transform 0.6s var(--ease), filter 0.5s;
+}
+.team-card:hover img {
+  transform: scale(1.07);
+  filter: brightness(0.95);
+}
+.team-card::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.2) 40%, transparent 65%);
+}
+/* Founder badge */
+.team-card.founder-card::after {
+  content: 'FOUNDER';
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  font-family: var(--f-mono); font-size: 0.48rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--white); color: #000;
+  padding: 2px 7px; border-radius: 100px; z-index: 4;
+}
+.team-card-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  z-index: 2; padding: 1.25rem;
+  transform: translateY(5px);
+  transition: transform 0.4s var(--ease);
+}
+.team-card:hover .team-card-body { transform: translateY(0); }
+.team-card-role {
+  font-family: var(--f-mono); font-size: 0.52rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 0.25rem;
+}
+.team-card-name {
+  font-family: var(--f-display); font-size: 1.6rem;
+  letter-spacing: 0.05em; color: var(--white); line-height: 1;
+}
+.team-card-actions {
+  margin-top: 0.75rem;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.4s var(--ease), opacity 0.3s 0.05s;
+}
+.team-card:hover .team-card-actions { max-height: 48px; opacity: 1; }
+.team-card-actions .btn { padding: 0.3rem 0.8rem; font-size: 0.62rem; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .team-all-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 580px) {
+  .team-all-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div id="pt"></div>
+<div class="bg-grid"></div>
+
+<nav class="nav" id="mainNav">
+  <div class="shell nav-inner">
+    <a class="nav-logo" href="../index.html"><img src="../assets/logo-new.png" alt="ProGrid"></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../roster/index.html">Roster</a>
+      <a href="../team/index.html" class="active">Team</a>
+      <a href="../contact/index.html" class="nav-pill">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="shell">
+    <div class="page-eyebrow">The People Behind the Org</div>
+    <h1 class="page-title">Our<br><span>Team</span></h1>
+    <p class="page-sub">Founders and talent agents at the intersection of competitive esports and serious player management.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="shell">
+  <section class="section">
+    <div class="sec-header reveal">
+      <div>
+        <div class="sec-label">ProGrid Agency</div>
+        <div class="sec-title">Meet the Team</div>
+      </div>
+      <div class="sec-note">5 Members</div>
+    </div>
+
+    <!-- ONE grid — all 5 people, identical card size -->
+    <div class="team-all-grid stagger">
+
+      <article class="team-card founder-card reveal">
+        <img src="../assets/syn.jpg" alt="Syn">
+        <div class="team-card-body">
+          <div class="team-card-role">Co-Founder</div>
+          <div class="team-card-name">Syn</div>
+          <div class="team-card-actions">
+            <a class="btn" href="https://x.com/synxirl" target="_blank" rel="noopener">Twitter ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="team-card founder-card reveal">
+        <img src="../assets/colt.jpg" alt="Colt">
+        <div class="team-card-body">
+          <div class="team-card-role">Co-Founder</div>
+          <div class="team-card-name">Lucas</div>
+          <div class="team-card-actions">
+            <a class="btn" href="https://x.com/ColtMNG" target="_blank" rel="noopener">Twitter ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="team-card reveal">
+        <img src="../assets/nathan.png" alt="Nathan">
+        <div class="team-card-body">
+          <div class="team-card-role">Talent Agent</div>
+          <div class="team-card-name">Nathan</div>
+          <div class="team-card-actions">
+            <a class="btn" href="https://x.com/NathxnNA" target="_blank" rel="noopener">Twitter ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="team-card reveal">
+        <img src="../assets/magnolia.jpg" alt="Magnolia">
+        <div class="team-card-body">
+          <div class="team-card-role">Talent Agent</div>
+          <div class="team-card-name">Magnolia</div>
+          <div class="team-card-actions">
+            <a class="btn" href="https://x.com/magnoliaflxtra" target="_blank" rel="noopener">Twitter ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="team-card reveal">
+        <img src="../assets/vax.jpg" alt="Vax">
+        <div class="team-card-body">
+          <div class="team-card-role">Talent Agent</div>
+          <div class="team-card-name">Vax</div>
+          <div class="team-card-actions">
+            <a class="btn" href="https://x.com/reallvax" target="_blank" rel="noopener">Twitter ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="statement reveal" style="border-top: 1px solid var(--border); padding: 5rem 0 4rem;">
+    <div class="statement-text" style="font-size: clamp(2rem,4vw,3.5rem);">Elite players deserve elite management.</div>
+    <p class="statement-sub">Every decision is centred on the player's long-term success. That's the ProGrid standard.</p>
+    <div style="margin-top: 2rem;">
+      <a class="btn btn-solid" href="../contact/index.html">Work With Our Team →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="shell footer-inner">
+    <a class="footer-brand" href="../index.html">PROGRID</a>
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="../roster/index.html">Roster</a>
+      <a href="../team/index.html">Team</a>
+      <a href="../contact/index.html">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 ProGrid Agency · contact@progrid.agency</div>
+  </div>
+</footer>
+
+<script src="../main.js"></script>
+</body>
+</html>
